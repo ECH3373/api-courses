@@ -13,11 +13,13 @@ const show = async (req, res) => {
 };
 
 const store = async (req, res) => {
+  await services.resources.reorder({ model, spaces: [req.body.order], filters: { module_id: req.body.module_id } });
   const data = await services.crud.store({ model, payload: req.body });
   return services.response.send({ res, data, message: 'resource successfully created' });
 };
 
 const update = async (req, res) => {
+  await services.resources.reorder({ model, spaces: [req.body.order], filters: { module_id: req.body.module_id, id: { $ne: req.params.id } } });
   const data = await services.crud.update({ model, id: req.params.id, payload: req.body });
   return services.response.send({ res, data, message: 'resource successfully updated' });
 };
