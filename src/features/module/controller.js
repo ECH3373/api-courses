@@ -12,7 +12,19 @@ const show = async (req, res) => {
   return services.response.send({ res, data, message: 'module successfully retrieved' });
 };
 
+const store = async (req, res) => {
+  const data = await services.crud.store({ model, payload: req.body });
+  return services.response.send({ res, data, message: 'module successfully created' });
+};
+
+const update = async (req, res) => {
+  const data = await services.crud.update({ model, id: req.params.id, payload: req.body });
+  return services.response.send({ res, data, message: 'module successfully updated' });
+};
+
 export const controller = {
   index,
   show,
+  store,
+  update,
 };

@@ -6,3 +6,5 @@ import { query } from './query.js';
 export const router = Router();
 router.get('/', middleware(query.index), controller.index);
 router.get('/:id', controller.show);
+router.post('/', controller.store);
+router.patch('/:id', controller.update);

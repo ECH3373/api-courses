@@ -1,5 +1,3 @@
-import { constrainedMemory } from 'process';
-
 const index = async ({ model, params = {} }) => {
   const data = await model.find(params.query).limit(params.cursor.limit).skip(params.cursor.skip).sort(params.cursor.sort);
   const total = await model.countDocuments(params.query);
@@ -22,7 +20,23 @@ const show = async ({ model, value, fields = ['_id'] } = {}) => {
   return null;
 };
 
+const store = async ({ model, payload = {} } = {}) => {
+  try {
+    const data = model.create(payload);
+    return data;
+  } catch (error) {}
+};
+
+const update = async ({ model, id, payload = {} } = {}) => {
+  try {
+    const data = model.findByIdAndUpdate(id, { $set: payload }, { new: true });
+    return data;
+  } catch (error) {}
+};
+
 export const crud = {
   index,
   show,
+  store,
+  update,
 };
