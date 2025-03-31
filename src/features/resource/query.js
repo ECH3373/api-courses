@@ -1,8 +1,8 @@
 import { helpers } from '../../helpers/index.js';
 
 const index = helpers.query.index({
-  search: ['name', 'quantity'],
-  filters: ['quantity', 'lesson_id'],
+  search: ['name'],
+  filters: ['lesson_id'],
   sort: ['quantity', 'lesson_id'],
 });
 
