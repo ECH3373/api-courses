@@ -22,14 +22,14 @@ const show = async ({ model, value, fields = ['_id'] } = {}) => {
 
 const store = async ({ model, payload = {} } = {}) => {
   try {
-    const data = model.create(payload);
+    const data = await model.create(payload);
     return data;
   } catch (error) {}
 };
 
 const update = async ({ model, id, payload = {} } = {}) => {
   try {
-    const data = model.findByIdAndUpdate(id, { $set: payload }, { new: true });
+    const data = await model.findByIdAndUpdate(id, { $set: payload }, { new: true });
     return data;
   } catch (error) {}
 };
