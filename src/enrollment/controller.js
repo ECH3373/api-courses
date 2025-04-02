@@ -4,7 +4,7 @@ const include = [{ key: 'course_id', name: 'course' }];
 const expand = [{ key: 'employee_id', name: 'employee', endpoint: 'http://82.29.197.244:3000/employees' }];
 
 const index = async (req, res) => {
-  const { data, meta } = await services.crud.index({ model: 'enrollment', query: req.query, include, expand });
+  const { data, meta } = await services.crud.index({ model: 'enrollment', query: req.query, include, expand, filters: ['employee_id', 'course_id'] });
   return services.response.send({ res, data, meta, message: 'the list of enrollments has been successfully retrieved' });
 };
 
