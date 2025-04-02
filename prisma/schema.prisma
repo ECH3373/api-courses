@@ -1,0 +1,79 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "mysql"
+  url      = env("DATABASE_URL")
+}
+
+model Course {
+  id                String    @id @default(uuid())
+  name              String    @unique
+  description       String?
+  image             String?
+
+  modules           Module[]
+  enrollment        Enrollment[]
+
+  @@map("courses")
+}
+
+model Module {
+  id                String    @id @default(uuid())
+  name              String    
+  description       String?
+  image             String?
+  order             Int       @default(1)
+  course_id         String
+  course            Course    @relation(fields: [course_id], references: [id], onDelete: Cascade)
+
+  lessons           Lesson[]
+  @@map("modules")
+}
+
+model Lesson {
+  id                String    @id @default(uuid())
+  name              String    
+  image             String?
+  file              String
+  duration_seconds  Int
+  order             Int       @default(1)
+  module_id         String
+  module            Module    @relation(fields: [module_id], references: [id], onDelete: Cascade)
+
+  resources         Resource[]
+  progresses        Progress[]
+
+  @@map("lessons")
+}
+
+model Resource {
+  id                String    @id @default(uuid())
+  name              String    
+  description       String?
+  image             String?
+  quantity          Int
+  lesson_id         String
+  leson             Lesson    @relation(fields: [lesson_id], references: [id], onDelete: Cascade)
+
+  @@map("resources")
+}
+
+model Enrollment {
+  id                String    @id @default(uuid())
+  employee_id       String
+  course_id         String
+  course            Course    @relation(fields: [course_id], references: [id], onDelete: Cascade)
+
+  @@map("enrollments")
+}
+
+model Progress {
+  id                String    @id @default(uuid())
+  employee_id       String
+  lesson_id         String
+  lesson            Lesson    @relation(fields: [lesson_id], references: [id], onDelete: Cascade)
+
+  @@map("progresses")
+}
