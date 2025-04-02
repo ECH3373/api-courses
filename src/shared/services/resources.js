@@ -13,6 +13,13 @@ const reorder = async ({ model, spaces = [], filters = {} } = {}) => {
   }
 };
 
+const exists = async ({ model, filters = {} } = {}) => {
+  const data = await prisma[model].findFirst(filters);
+  if (data) return true;
+  return false;
+};
+
 export const resources = {
   reorder,
+  exists,
 };
