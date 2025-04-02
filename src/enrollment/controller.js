@@ -4,7 +4,7 @@ const include = [{ key: 'course_id', name: 'course' }];
 const expand = [{ key: 'employee_id', name: 'employee', endpoint: 'http://82.29.197.244:3000/employees' }];
 
 const index = async (req, res) => {
-  const { data, meta } = await services.crud.index({ model: 'enrollment', query: req.query, include, expand, search: ['name', 'description'] });
+  const { data, meta } = await services.crud.index({ model: 'enrollment', query: req.query, include, expand });
   return services.response.send({ res, data, meta, message: 'the list of enrollments has been successfully retrieved' });
 };
 
@@ -15,12 +15,12 @@ const show = async (req, res) => {
 };
 
 const store = async (req, res) => {
-  const data = await services.crud.store({ model: 'enrollment', payload: req.body, keys: ['name', 'description', 'image'] });
+  const data = await services.crud.store({ model: 'enrollment', payload: req.body, keys: ['employee_id', 'course_id'] });
   return services.response.send({ res, data, message: 'enrollment created successfully' });
 };
 
 const update = async (req, res) => {
-  const data = await services.crud.update({ model: 'enrollment', id: req.params.id, payload: req.body, keys: ['name', 'description', 'image'] });
+  const data = await services.crud.update({ model: 'enrollment', id: req.params.id, payload: req.body, keys: ['employee_id', 'course_id'] });
   return services.response.send({ res, data, message: 'enrollment updated successfully' });
 };
 
