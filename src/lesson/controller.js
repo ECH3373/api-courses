@@ -1,7 +1,7 @@
 import { services } from '../shared/services/index.js';
 
 const index = async (req, res) => {
-  const { data, meta } = await services.crud.index({ model: 'lesson', query: req.query, search: ['name', 'duration_seconds'], filters: ['duration_seconds', 'mudle_id'] });
+  const { data, meta } = await services.crud.index({ model: 'lesson', query: req.query, search: ['name', 'duration_seconds'], filters: ['duration_seconds', 'module_id'] });
   return services.response.send({ res, data, meta, message: 'the list of lessons has been successfully retrieved' });
 };
 
