@@ -15,7 +15,7 @@ const show = async (req, res) => {
 };
 
 const store = async (req, res) => {
-  const exists = services.resources.exists({ model: 'progress', filters: { employee_id: req.body.employee_id, lesson_id: req.body.lesson_id } });
+  const exists = await services.resources.exists({ model: 'progress', filters: { employee_id: req.body.employee_id, lesson_id: req.body.lesson_id } });
   if (exists) return services.response.send({ res, code: 409, error: 'progress alredy exists' });
   const data = await services.crud.store({ model: 'progress', payload: req.body, keys: ['employee_id', 'lesson_id'] });
   return services.response.send({ res, data, message: 'progress created successfully' });

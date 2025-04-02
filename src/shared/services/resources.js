@@ -14,7 +14,7 @@ const reorder = async ({ model, spaces = [], filters = {} } = {}) => {
 };
 
 const exists = async ({ model, filters = {} } = {}) => {
-  const data = await prisma[model].findFirst(filters);
+  const data = (await prisma[model].count({ where: filters })) > 0;
   if (data) return true;
   return false;
 };
