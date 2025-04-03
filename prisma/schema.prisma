@@ -36,8 +36,8 @@ model Lesson {
   id                String    @id @default(uuid())
   name              String    
   image             String?
-  file              String
-  duration_seconds  Int
+  file              String?
+  duration_seconds  Int       @default(1)
   order             Int       @default(1)
   module_id         String
   module            Module    @relation(fields: [module_id], references: [id], onDelete: Cascade)
