@@ -149,18 +149,19 @@ const show = async ({ model, target, keys = ['id'], include = [], expand = [] } 
 
 const store = async ({ model, payload = {}, keys = [] } = {}) => {
   const filteredData = keys.length ? Object.fromEntries(Object.entries(payload).filter(([key]) => keys.includes(key))) : payload;
-  const data = await prisma[model].create({ data: filteredData });
+
+  const lowercasedData = Object.fromEntries(Object.entries(filteredData).map(([key, value]) => [key, typeof value === 'string' ? value.toLowerCase() : value]));
+
+  const data = await prisma[model].create({ data: lowercasedData });
   return data;
 };
 
 const update = async ({ model, id, payload = {}, keys = [] } = {}) => {
   const filteredData = keys.length ? Object.fromEntries(Object.entries(payload).filter(([key]) => keys.includes(key))) : payload;
 
-  const data = await prisma[model].update({
-    where: { id },
-    data: filteredData,
-  });
+  const lowercasedData = Object.fromEntries(Object.entries(filteredData).map(([key, value]) => [key, typeof value === 'string' ? value.toLowerCase() : value]));
 
+  const data = await prisma[model].update({ where: { id }, data: lowercasedData });
   return data;
 };
 
