@@ -24,6 +24,7 @@ model Module {
   name              String    
   description       String?
   image             String?
+  background        String?
   order             Int       @default(1)
   course_id         String
   course            Course    @relation(fields: [course_id], references: [id], onDelete: Cascade)
