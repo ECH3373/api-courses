@@ -14,14 +14,14 @@ const show = async (req, res) => {
 const store = async (req, res) => {
   if (req.body.order <= 0 || !req.body.order) req.body.order = 1;
   await services.resources.reorder({ model: 'module', spaces: [req.body.order], filters: { course_id: req.body.course_id } });
-  const data = await services.crud.store({ model: 'module', payload: req.body, keys: ['name', 'description', 'image', 'order', 'course_id'] });
+  const data = await services.crud.store({ model: 'module', payload: req.body, keys: ['name', 'description', 'image', 'background', 'order', 'course_id'] });
   return services.response.send({ res, data, message: 'module created successfully' });
 };
 
 const update = async (req, res) => {
   if (req.body.order <= 0) req.body.order = 1;
   await services.resources.reorder({ model: 'module', spaces: [req.body.order], filters: { course_id: req.body.course_id, NOT: { id: req.params.id } } });
-  const data = await services.crud.update({ model: 'module', id: req.params.id, payload: req.body, keys: ['name', 'description', 'image', 'order'] });
+  const data = await services.crud.update({ model: 'module', id: req.params.id, payload: req.body, keys: ['name', 'description', 'image', 'background', 'order'] });
   return services.response.send({ res, data, message: 'module updated successfully' });
 };
 
