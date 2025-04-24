@@ -26,7 +26,7 @@ const update = async (req, res) => {
 };
 
 const destroy = async (req, res) => {
-  const data = await services.crud.destroy({ model: 'course', id: req.params.id });
+  const data = await services.crud.destroy({ model: 'module', id: req.params.id });
   await services.resources.reorder({ model: 'module', filters: { course_id: req.body.course_id } });
   return services.response.send({ res, data, message: 'course deleted successfully' });
 };
