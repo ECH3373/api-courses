@@ -12,6 +12,8 @@ model Course {
   name              String    @unique
   description       String?
   image             String?
+  background        String?
+  book              String?
 
   modules           Module[]
   enrollment        Enrollment[]

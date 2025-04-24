@@ -12,12 +12,12 @@ const show = async (req, res) => {
 };
 
 const store = async (req, res) => {
-  const data = await services.crud.store({ model: 'course', payload: req.body, keys: ['name', 'description', 'image'] });
+  const data = await services.crud.store({ model: 'course', payload: req.body, keys: ['name', 'description', 'image', 'background', 'book'] });
   return services.response.send({ res, data, message: 'course created successfully' });
 };
 
 const update = async (req, res) => {
-  const data = await services.crud.update({ model: 'course', id: req.params.id, payload: req.body, keys: ['name', 'description', 'image'] });
+  const data = await services.crud.update({ model: 'course', id: req.params.id, payload: req.body, keys: ['name', 'description', 'image', 'background', 'book'] });
   return services.response.send({ res, data, message: 'course updated successfully' });
 };
 
